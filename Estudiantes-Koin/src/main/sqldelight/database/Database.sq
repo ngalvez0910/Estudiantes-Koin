@@ -1,0 +1,48 @@
+CREATE TABLE IF NOT EXISTS EstudianteEntity (
+    id INTEGER PRIMARY KEY,
+    nombre TEXT NOT NULL,
+    calificacion REAL,
+    created_at TEXT NOT NULL,
+    updated_at TEXT NOT NULL,
+    is_deleted INTEGER NOT NULL DEFAULT 0
+);
+
+INSERT INTO EstudianteEntity (nombre, calificacion, created_at, updated_at)
+VALUES
+    ('Ana García', 7.5, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Juan López', 8.9, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('María Rodríguez', 6.3, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Pedro Martínez', 9.1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Sofía González', 5.6, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Carlos Sánchez', 7.8, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Laura Pérez', 8.2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Diego Ramírez', 6.7, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Lucía Fernández', 9.5, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Alejandro Díaz', 4.9, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+removeAllEstudiantes:
+DELETE FROM EstudianteEntity;
+
+selectAllEstudiantes:
+SELECT * FROM EstudianteEntity;
+
+selectEstudianteById:
+SELECT * FROM EstudianteEntity WHERE id = ?;
+
+selectAllEstudiantesByNombre:
+SELECT * FROM EstudianteEntity WHERE nombre = ?;
+
+selectAllEstudiantesByCalificacion:
+SELECT * FROM EstudianteEntity WHERE calificacion = ?;
+
+insertEstudiante:
+INSERT INTO EstudianteEntity (nombre, calificacion, created_at, updated_at) VALUES (?, ?, ?, ?);
+
+updateEstudiante:
+UPDATE EstudianteEntity SET nombre = ?, calificacion = ?, updated_at = ?, is_deleted = ? WHERE id = ?;
+
+deleteEstudiante:
+DELETE FROM EstudianteEntity WHERE id = ?;
+
+selectEstudianteLastInserted:
+SELECT * FROM EstudianteEntity WHERE id = (SELECT MAX(id) FROM EstudianteEntity);
